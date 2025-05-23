@@ -1,0 +1,60 @@
+* {
+    all: unset;
+}
+
+// global
+// using catppuccin colors
+.bar {
+    background-color: #363a4f; // surface 0
+    // background-color: transparent;
+    color: #cad3f5; // text
+    padding: 2px;
+    font-family: "monospace";
+    font-size: 11;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px #000000;
+    // border: 1px solid rgba(238, 153, 160, 0.5);
+}
+
+// styles on classes
+
+.sidestuff, .workspaces, .title {
+    all: unset;
+    // border: 1px solid rgba(238, 153, 160, 0.5);
+    padding: 4px 20px;
+    border-radius: 6px;
+}
+
+.sidestuff slider {
+    all: unset;
+    color: #ffd5cd;
+}
+
+.metric scale trough highlight {
+    all: unset;
+    background-color: #d35d6e;
+    color: #000000;
+    border-radius: 10px;
+}
+
+.metric scale trough {
+    all: unset;
+    background-color: #4e4e4e;
+    border-radius: 50px;
+    min-height: 3px;
+    min-width: 50px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.label-ram .label-cpu {
+    font-size: large;
+}
+
+.workspaces button:hover {
+    color: #d35d6e;
+}
+
+.workspaces.active {
+    background-color: #5b6079;
+}

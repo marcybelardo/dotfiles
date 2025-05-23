@@ -1,0 +1,73 @@
+(defwidget bar [num]
+    (centerbox :orientation "h"
+        (workspaces
+            :num { num == 0 ? primary_workspaces : secondary_workspaces })
+        (title)
+        (sidestuff)))
+
+(defwidget sidestuff []
+    (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+        (metric :label ""
+            :value {volume * 100}
+            :onchange "")
+        (metric :label ""
+                :value {EWW_RAM.used_mem_perc}
+                :onchange "")
+        (metric :label ""
+                :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+                :onchange "")
+        time))
+
+(defwidget workspaces [num]
+    (box :class "workspaces"
+         :orientation "h"
+         :space-evenly true
+         :halign "start"
+         :spacing 10
+        (for n in num
+            (box :class {n == (active_workspace) ? "active" : "inactive" }
+                (button :onclick "hyprctl dispatch workspace ${n}" n)))))
+
+(defwidget title []
+    (box :class "title"
+         :orientation "h"
+         :halign "center"
+        title))
+
+(defwidget metric [label value onchange]
+    (box :orientation "h"
+         :class "metric"
+         :space-evenly false
+        (box :class "label" label)
+        (scale :min 0
+               :max 101
+               :active {onchange != ""}
+               :value value
+               :onchange onchange)))
+
+(deflisten title :initial "melin03"
+    `scripts/getactivewindow`)
+
+(deflisten active_workspace :initial "1"
+    `scripts/getactiveworkspace`)
+
+(defpoll volume :interval "1s"
+    `scripts/getvolume`)
+
+(defpoll time :interval "1s"
+    "date '+%Y %b %d %a %T'")
+
+(defvar primary_workspaces "[1, 2, 3, 4, 5]")
+(defvar secondary_workspaces "[6, 7, 8, 9, 10]")
+
+(defwindow bar [screen]
+    :monitor screen
+    :windowtype "dock"
+    :geometry (geometry :x "0%"
+                        :y "0.5%"
+                        :width "95%"
+                        :height "10px"
+                        :anchor "top center")
+    :exclusive true
+    (bar
+        :num screen))
