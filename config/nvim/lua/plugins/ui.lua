@@ -266,6 +266,9 @@ return {
         ---@module "ibl"
         ---@type ibl.config
         opts = {
+            indent = {
+                tab_char = "▎",
+            },
             exclude = {
                 filetypes = { "dashboard", "lazy", "mason", "neo-tree" },
             },

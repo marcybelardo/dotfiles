@@ -12,4 +12,8 @@ return {
             },
         },
     },
+
+    {
+        "tpope/vim-surround"
+    }
 }

@@ -6,6 +6,14 @@ setopt inc_append_history
 bindkey "\e[A" history-beginning-search-backward
 bindkey "\e[B" history-beginning-search-forward
 
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey -M vicmd "^P" history-beginning-search-backward-end
+bindkey -M viins "^P" history-beginning-search-backward-end
+bindkey -M vicmd "^N" history-beginning-search-forward-end
+bindkey -M viins "^N" history-beginning-search-forward-end
+
 if [[ ! -n $TMUX ]]; then
     # get session IDs
     session_ids="$(tmux list-sessions)"
@@ -36,12 +44,14 @@ if [[ ! -n $TMUX ]]; then
     fi
 fi
 
-alias ls='ls --color=auto -hv'
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+
+alias ls='eza'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias ip='ip -c=auto'
 alias ll='ls -l'
-alias lsa='ls -lA'
+alias lsa='ls -laB'
 alias mvi='mv -i'
 
 autoload -U compinit && compinit

@@ -1,10 +1,18 @@
 return {
+    -- {
+    --     "catppuccin/nvim",
+    --     name = "catppuccin",
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd("colorscheme catppuccin-macchiato")
+    --     end,
+    -- },
+
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
+        "rebelot/kanagawa.nvim",
         priority = 1000,
         config = function()
-            vim.cmd([[colorscheme catppuccin-macchiato]])
+            vim.cmd("colorscheme kanagawa")
         end,
-    },
+    }
 }

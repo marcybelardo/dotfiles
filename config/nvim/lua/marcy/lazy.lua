@@ -26,7 +26,7 @@ require("lazy").setup({
     },
     -- configure any other settings here. see documentation for more details
     -- colorscheme that will be used when installing plugins
-    install = { colorscheme = { "catppuccin-macchiato" } },
+    install = { colorscheme = { "kanagawa-wave" } },
     -- automatically check for plugin updates
     checker = { enabled = true },
 })

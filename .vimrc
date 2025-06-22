@@ -61,7 +61,7 @@ set novisualbell
 set t_vb=
 set tm=500
 
-colorscheme catppuccin_macchiato
+colorscheme catppuccin_mocha
 let g:airline_theme='catppuccin_mocha'
 
 syntax enable

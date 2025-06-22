@@ -25,7 +25,10 @@ return {
                 "markdown_inline",
                 "rust",
                 "python",
-                "elixir"
+                "elixir",
+                "javascript",
+                "typescript",
+                "html"
             },
             sync_install = false,
             auto_install = true,

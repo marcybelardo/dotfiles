@@ -130,10 +130,13 @@ return {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "clangd",
+                    "gopls",
                     "lua_ls",
                     "rust_analyzer",
                     "basedpyright",
                     "elixirls",
+                    "zls",
+                    "ts_ls",
                 },
                 handlers = {
                     -- this first function is the "default handler"
