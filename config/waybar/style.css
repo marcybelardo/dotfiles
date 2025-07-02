@@ -1,0 +1,131 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: UbuntuMono Nerd Font;
+  font-size: 12px;
+  min-height: 24px;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+.modules-left {
+  padding: 0 8px;
+}
+
+#workspaces {
+  all: unset;
+  border-radius: 26px;
+  border-width: 0px;
+  margin-top: 4px;
+  margin-right: 16px;
+  padding: 2px 16px;
+  margin-bottom: 0;
+  background: #181926; /* surface 0 */
+}
+
+#workspaces button {
+  all: unset;
+  color: #939ab7; /* overlay 2 */
+  transition: color 0.5s ease-in-out;
+}
+
+#workspaces button.focused {
+  color: #a6da95; /* green */
+  transition: color 0.5s ease-in-out;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+  background: #181926; /* surface 0 */
+  border: none;
+}
+
+#cpu, #memory, #window, #network, #custom-updates {
+  background: #181926; /* surface 0 */
+  border-radius: 26px;
+  margin-right: 16px;
+  margin-top: 4px;
+  margin-bottom: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+#window {
+  color: #f4dbd6; /* rosewater */
+}
+
+#network {
+  color: #f5bde6; /* pink */
+}
+
+#network.disconnected {
+  color: #ed8796; /* red */
+}
+
+#custom-updates {
+  color: #89dceb; /* sky */
+}
+
+#wireplumber {
+  background: #181926; /* surface 0 */
+  border-radius: 26px;
+  margin-right: 16px;
+  margin-top: 4px;
+  margin-bottom: 0;
+  padding-left: 16px;
+  padding-right: 20px;
+  color: #c6a0f6; /* mauve */
+}
+
+#cpu {
+  color: #ee99a0; /* peach */
+}
+
+#memory {
+  color: #eed49f; /* yellow */
+}
+
+#clock {
+  background: #181926; /* surface 0 */
+  border-radius: 26px;
+  margin-right: 16px;
+  margin-top: 4px;
+  margin-bottom: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: #8db5ca; /* teal */
+}
+
+#power {
+  all: unset;
+  margin-top: 4px;
+  margin-right: 16px;
+  padding: 0 8px;
+  background: #181926; /* surface 0 */
+  border-radius: 26px;
+  margin-top: 4px;
+}
+
+#power * {
+  color: #ed8796; /* red */
+  padding: 0 8px;
+}
+
+#custom-reboot {
+  color: #f0c6c6; /* flamingo */
+}
+
+#custom-exit {
+  color: #ee99a0; /* peach */
+}
+
+#custom-lock {
+  color: #f0c6c6; /* flamingo */
+}

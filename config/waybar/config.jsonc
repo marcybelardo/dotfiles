@@ -1,0 +1,84 @@
+{
+	"layer": "top",
+	"modules-left": ["niri/workspaces", "niri/window", "custom/updates", "network"],
+	"modules-center": [],
+	"modules-right": ["wireplumber", "cpu", "memory", "clock", "group/power"],
+  "niri/workspaces": {
+    "format": "<span>{icon}</span>",
+    "current-only": true,
+    "disable-click": true,
+    "format-icons": {
+      "default": " ",
+		  "focused": "󰪥 "
+    }
+  },
+  "network": {
+    "interval": 5,
+    "interface": "enp42s0",
+    "format-ethernet": "{ipaddr} {bandwidthTotalBits}"
+  },
+  "custom/updates": {
+    "format": "{} {icon}",
+    "return-type": "json",
+    "format-icons": {
+      "has-updates": "󱍷",
+      "updated": "󰂪"
+    },
+    "exec-if": "which waybar-module-pacman-updates",
+    "exec": "waybar-module-pacman-updates --interval-seconds 5 --network-interval-seconds 300"
+  },
+  "cpu": {
+    "format": "{icon0} {icon1} {icon2} {icon3} {icon4} {icon5} {icon6} {icon7} {icon8} {icon9} {icon10} {icon11}",
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+  },
+  "memory": {
+    "interval": 30,
+    "format": "{used:0.1f}G/{total:0.1f}G "
+  },
+  "wireplumber": {
+    "format": "{volume}% {icon}",
+    "format-muted": "",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "max-volume": 150,
+    "format-icons": ["", "", ""],
+  },
+  "clock": {
+    "interval": 1,
+    "timezone": "Europe/Istanbul",
+    "format": "{:%a %d %b %y %H:%M:%S}"
+  },
+  "group/power": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "not-power",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/power",
+      "custom/quit",
+      "custom/lock",
+      "custom/reboot"
+    ]
+  },
+  "custom/quit": {
+    "format": "󰗼 ",
+    "tooltip": false,
+    "on-click": "niri msg action quit"
+  },
+  "custom/lock": {
+      "format": "󰍁 ",
+      "tooltip": false,
+      "on-click": "swaylock -f"
+  },
+  "custom/reboot": {
+      "format": "󰜉 ",
+      "tooltip": false,
+      "on-click": "reboot"
+  },
+  "custom/power": {
+      "format": " ",
+      "tooltip": false,
+      "on-click": "shutdown now"
+  }
+}
