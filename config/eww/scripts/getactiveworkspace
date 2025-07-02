@@ -2,9 +2,9 @@
 
 handle() {
     case $1 in
-        focusedmon*) if ! [[ "$1" =~ ^focusedmonv2 ]]; then
-            echo $1 | rev | cut -d"," -f1 | rev
-        fi ;;
+        workspace*) if ! [[ "$1" =~ ^workspacev2 ]]; then
+            echo $1 | rev | cut -d">" -f1 | rev
+        fi ;
     esac
 }
 

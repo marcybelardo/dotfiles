@@ -89,7 +89,7 @@ return {
             ins_left {
                 -- mode component
                 function()
-                    return ''
+                    return ''
                 end,
                 color = function()
                     -- auto change color according to neovims mode
@@ -275,12 +275,12 @@ return {
         },
     },
 
-    {
-        "m4xshen/hardtime.nvim",
-        lazy = false,
-        dependencies = { "MunifTanjim/nui.nvim" },
-        opts = {},
-    },
+    -- {
+    --     "m4xshen/hardtime.nvim",
+    --     lazy = false,
+    --     dependencies = { "MunifTanjim/nui.nvim" },
+    --     opts = {},
+    -- },
 
     {
         "folke/noice.nvim",

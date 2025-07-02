@@ -4,7 +4,7 @@ return {
     --     name = "catppuccin",
     --     priority = 1000,
     --     config = function()
-    --         vim.cmd("colorscheme catppuccin-macchiato")
+    --         vim.cmd("colorscheme catppuccin-mocha")
     --     end,
     -- },
 
@@ -15,4 +15,13 @@ return {
             vim.cmd("colorscheme kanagawa")
         end,
     }
+
+    -- {
+    --     "embark-theme/vim",
+    --     name = "embark",
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd("colorscheme embark")
+    --     end,
+    -- }
 }

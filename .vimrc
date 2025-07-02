@@ -19,6 +19,7 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 " FZF
 nnoremap <leader>fa :Files<cr>
 nnoremap <leader>fg :Rg<cr>
+nnoremap <leader>ft :GFiles<cr>
 nnoremap <leader>fb :Buffers<cr>
 
 " LSP
@@ -32,6 +33,8 @@ nnoremap <C-n> :NERDTree<cr>
 nnoremap <C-t> :NERDTreeToggle<cr>
 nnoremap <C-f> :NERDTreeFind<cr>
 
+nnoremap <leader>x :bd<cr>
+
 set so=7
 
 let $LANG='en'
@@ -43,6 +46,7 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
 set ruler
 set cmdheight=1
+set foldcolumn=1
 set hid
 set ignorecase
 set smartcase
@@ -61,10 +65,16 @@ set novisualbell
 set t_vb=
 set tm=500
 
-colorscheme catppuccin_mocha
-let g:airline_theme='catppuccin_mocha'
+set background=dark
+let g:everforest_background = "hard"
+let g:everforest_better_performance = 1
+colorscheme everforest
+let g:airline_theme='everforest'
 
-syntax enable
+syntax on
+
+set list
+set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~,leadmultispace:▏\ \ \ 
 
 set nobackup
 set nowb
@@ -95,6 +105,12 @@ call LspAddServer([#{name: 'elixir',
 call LspAddServer([#{name: 'clangd',
         \          filetype: ['c', 'cpp'],
         \          path: '/usr/bin/clangd',
+        \          args: [],
+        \          syncInit: v:true
+        \       }])
+call LspAddServer([#{name: 'zls',
+        \          filetype: ['zig'],
+        \          path: '/usr/bin/zls',
         \          args: [],
         \          syncInit: v:true
         \       }])
