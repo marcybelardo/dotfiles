@@ -66,10 +66,8 @@ set t_vb=
 set tm=500
 
 set background=dark
-let g:everforest_background = "hard"
-let g:everforest_better_performance = 1
-colorscheme everforest
-let g:airline_theme='everforest'
+colorscheme rosepine_moon
+let g:airline_theme = 'catppuccin_mocha'
 
 syntax on
 
@@ -89,6 +87,11 @@ set tw=500
 set ai
 set si
 set wrap
+
+aug i3config_ft_detection
+    au!
+    au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+aug end
 
 call LspAddServer([#{name: 'rustlang',
         \          filetype: ['rust'],
@@ -114,3 +117,10 @@ call LspAddServer([#{name: 'zls',
         \          args: [],
         \          syncInit: v:true
         \       }])
+call LspAddServer([#{name: 'bash-language-server',
+        \          filetype: ['sh'],
+        \          path: '/usr/bin/bash-language-server',
+        \          args: ["start"],
+        \          syncInit: v:true
+        \       }])
+

@@ -1,5 +1,5 @@
 general.import = [
-	"~/.config/alacritty/catppuccin-macchiato.toml"
+	"~/.config/alacritty/catppuccin-mocha.toml"
 ]
 
 [env]
@@ -9,11 +9,10 @@ term = "xterm-256color"
 dynamic_title = true
 padding = { x = 8, y = 6 }
 opacity = 0.85
-blur = true
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
-size = 8
+size = 7
 
 [mouse]
 hide_when_typing = true

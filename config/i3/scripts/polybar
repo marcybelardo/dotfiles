@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+killall -q polybar
+
+while pgrep -x polybar >/dev/null; do sleep 1; done
+
+polybar --list-monitors | while IFS=$'\n' read line; do
+    monitor=$(echo $line | cut -d':' -f1)
+    MONITOR=$monitor polybar --reload "top" &
+done

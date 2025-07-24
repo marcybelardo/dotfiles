@@ -9,8 +9,11 @@
     "disable-click": true,
     "format-icons": {
       "default": " ",
-		  "focused": "󰪥 "
+      "focused": "󰪥 "
     }
+  },
+  "niri/window": {
+    "max-length": 48,
   },
   "network": {
     "interval": 5,
@@ -28,7 +31,7 @@
     "exec": "waybar-module-pacman-updates --interval-seconds 5 --network-interval-seconds 300"
   },
   "cpu": {
-    "format": "{icon0} {icon1} {icon2} {icon3} {icon4} {icon5} {icon6} {icon7} {icon8} {icon9} {icon10} {icon11}",
+    "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}",
     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
   },
   "memory": {
