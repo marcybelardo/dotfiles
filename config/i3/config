@@ -1,7 +1,7 @@
-exec --no-startup-id ~/.screenlayout/base_layout.sh &
+exec --no-startup-id ~/.screenlayout/base_layout.sh
 exec_always --no-startup-id picom &
 exec_always --no-startup-id ~/.config/i3/scripts/polybar &
-exec_always --no-startup-id killall -q redshift && redshift -l 39.9:32.9 &
+exec_always --no-startup-id redshift -l 39.9:32.9 &
 exec_always --no-startup-id dunst &
 
 font pango:monospace 8
