@@ -19,14 +19,11 @@ function main() {
     local volume=$( echo ${volume_and_mute} | sed 's|^\([[:digit:]]\+\).*$|\1|')
     local muted=$( echo ${volume_and_mute} | grep -o MUTE )
 
-    local symbol
     if [[ -n $muted ]]; then
-        symbol='󰟎'
+        echo "MUTE"
     else
-        symbol='󰋋'
+        echo "VOL ${volume}"
     fi
-
-    echo "${symbol} ${volume}%"
 }
 
 main "$@"

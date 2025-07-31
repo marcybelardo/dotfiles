@@ -105,9 +105,8 @@ bindsym Mod4+a focus parent
 
 for_window [class="^.*"] border pixel 1
 
-# class					border	backgr	text	indicator	child_border
-#															catppuccin maroon
-client.focused          #eba0ac #285577 #ffffff #2e9ef4     #eba0ac
+# class	                border	backgr	text	indicator   child_border
+client.focused          #d4ceba35 #285577 #ffffff #2e9ef4     #d4ceba35
 
 gaps inner 2
 gaps outer 2
