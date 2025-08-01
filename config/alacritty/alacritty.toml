@@ -12,7 +12,7 @@ opacity = 0.75
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
-size = 7
+size = 8
 
 [mouse]
 hide_when_typing = true
