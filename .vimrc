@@ -19,20 +19,31 @@ Plug 'junegunn/limelight.vim'
 
 " colorschemes
 Plug 'lunacookies/vim-substrata'
-Plug 'nordtheme/vim'
 Plug 'zenbones-theme/zenbones.nvim'
+Plug 'cocopon/iceberg.vim'
 
 " ui
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
+
+Plug 'elixir-editors/vim-elixir'
 
 call plug#end()
 
 packadd lsp
 
 set background=dark
-colorscheme kanagawa
-let g:lightline = { 'colorscheme': 'duckbones' }
+colorscheme kanagawabones
+let g:lightline = {
+        \ 'colorscheme': 'kanagawabones',
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ],
+        \             [ 'filename', 'readonly', 'gitbranch', 'modified' ] ]
+        \ },
+        \ 'component_function': {
+        \   'gitbranch': 'FugitiveHead'
+        \ },
+        \ }
 
 au FocusGained,BufEnter * silent! checktime
 
@@ -54,83 +65,12 @@ nnoremap <leader><Space> :Buffers<CR>
 " LSP
 nnoremap gD :LspGotoDeclaration<CR>
 nnoremap K :LspHover<CR>
+nnoremap grd :LspDiag show<CR>
 nnoremap gra :LspCodeAction<CR>
 
 " Lights!
 nnoremap <leader>ll :Limelight!!<CR>
 nnoremap <leader>lg :Goyo<CR>
-
-" netrw
-nnoremap <leader>dd :Lexplore %:p:h<CR>
-nnoremap <leader>da :Lexplore<CR>
-
-function! NetrwRemoveRecursive()
-        if &filetype ==# 'netrw'
-                cnoremap <buffer> <CR> rm -r<CR>
-                normal mu
-                normal mf
-
-                try
-                        normal mx
-                catch
-                        echo "cancelled"
-                endtry
-
-                cunmap <buffer> <CR>
-        endif
-endfunction
-
-function! NetrwMapping()
-        " go back in the directory
-        nmap <buffer> H u
-        " go up in the directory
-        nmap <buffer> h -^
-        " open a directory or file
-        nmap <buffer> l <CR>
-
-        " toggle dotfiles
-        nmap <buffer> . gh
-        " close preview window
-        nmap <buffer> P <C-w>z
-
-        " open a file and close netrw
-        nmap <buffer> L <CR>:Lexplore<CR>
-        " close netrw
-        nmap <buffer> <leader>dd :Lexplore<CR>
-
-        " mark file or directory
-        nmap <buffer> <Tab> mf
-        " unmark all files in current buffer
-        nmap <buffer> <S-Tab> mF
-        " remove all marks on all files
-        nmap <buffer> <leader><Tab> mu
-
-        " create a file
-        nmap <buffer> ff %:w<CR>:buffer #<CR>
-        " rename a file
-        nmap <buffer> fe R
-        " copy marked files
-        nmap <buffer> fc mc
-        " assign the target dir and copy in one step
-        nmap <buffer> fC mtmc
-        " move marked files
-        nmap <buffer> fx mm
-        " assign the target dir and move in one step
-        nmap <buffer> fX mtmm
-        " for running external commands on marked files
-        nmap <buffer> f; mx
-
-        " show list of marked files
-        nmap <buffer> fl :echo join(netrw#Expose("netrwmarkfilelist"), "\n")<CR>
-
-        " recursively delete files
-        nmap <buffer> FF :call NetrwRemoveRecursive()<CR>
-endfunction
-
-aug netrw_mapping
-        au!
-        au FileType netrw call NetrwMapping()
-aug end
 
 filetype plugin indent on
 set autoread
@@ -234,11 +174,5 @@ call LspAddServer([#{name: 'zls',
         \          filetype: ['zig'],
         \          path: '/usr/bin/zls',
         \          args: [],
-        \          syncInit: v:true
-        \       }])
-call LspAddServer([#{name: 'bash-language-server',
-        \          filetype: ['sh'],
-        \          path: '/usr/bin/bash-language-server',
-        \          args: ["start"],
         \          syncInit: v:true
         \       }])
