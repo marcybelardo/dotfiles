@@ -41,9 +41,29 @@ alias ip='ip -c=auto'
 alias ll='ls -l'
 alias lsa='ls -lab'
 alias mvi='mv -i'
-alias upup='sudo pacman -Syu && sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias upup='sudo pacman -Syyu && sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias gpusha='git push && git push soft main'
 alias mkgrub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias rsync='rsync_args'
+alias fhtc='fht-compositor'
+
+cpr() {
+	rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
+}
+
+mvr() {
+	rsync --archive -hh --partial --info=stats1,progress2 --modify-window --remove-source-files "$@"
+}
+
+alias ua_drop_caches='sudo paccache -rk3; paru -Sc --aur --noconfirm'
+alias ua_update_all='export TMPFILE="$(mktemp)"; \
+	sudo true; \
+	rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+	&& sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+	&& sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
+	&& ua_drop_caches'
+
+alias upupup='ua_update_all && upup'
 
 eval "$(starship init bash)"
 

@@ -12,6 +12,8 @@ updates=$((updates_arch + updates_aur))
 
 if [ "$updates" -gt 0 ]; then
     echo "Up $updates_arch/$updates_aur"
+    exit 0
 else
     echo "NoUp"
+    exit 1
 fi

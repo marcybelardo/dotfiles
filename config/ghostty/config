@@ -1,13 +1,13 @@
-font-family = Iosevka Term SS03
+font-family = Iosevka Term SS04
 font-style = Medium Extended
-font-style-bold = Heavy Extended
+font-style-bold = Bold Extended
 font-style-italic = Medium Extended Italic
-font-style-bold-italic = Heavy Extended Italic
+font-style-bold-italic = Bold Extended Italic
 font-size = 8
 
 theme = Kanagawa Wave
 
-background-opacity = 0.75
+background-opacity = 0.85
 background-blur = true
 
 window-decoration = none

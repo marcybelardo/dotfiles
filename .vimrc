@@ -18,24 +18,50 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 " colorschemes
-Plug 'lunacookies/vim-substrata'
 Plug 'zenbones-theme/zenbones.nvim'
-Plug 'cocopon/iceberg.vim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/everforest'
+Plug 'sainnhe/edge'
 
 " ui
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 
+" filetypes
 Plug 'elixir-editors/vim-elixir'
+Plug 'ziglang/zig.vim'
+Plug 'bfrg/vim-c-cpp-modern'
+Plug 'elkowar/yuck.vim'
+Plug 'justinj/vim-pico8-syntax'
+
+" writing
+Plug 'preservim/vim-pencil'
+
+" snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
 packadd lsp
 
 set background=dark
-colorscheme kanagawabones
+
+let g:gruvbox_material_background='hard'
+let g:gruvbox_material_better_performance=1
+colorscheme gruvbox-material
+
+" let g:edge_style='aura'
+" let g:edge_dim_foreground=0
+" let g:edge_better_performance=1
+" colorscheme edge
+
+" let g:everforest_background='hard'
+" let g:everforest_better_performance=1
+" colorscheme everforest
+
 let g:lightline = {
-        \ 'colorscheme': 'kanagawabones',
+        \ 'colorscheme': 'gruvbox_material',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'filename', 'readonly', 'gitbranch', 'modified' ] ]
@@ -44,6 +70,10 @@ let g:lightline = {
         \   'gitbranch': 'FugitiveHead'
         \ },
         \ }
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
 au FocusGained,BufEnter * silent! checktime
 
@@ -109,7 +139,7 @@ set tm=500
 syntax on
 
 set list
-set listchars=tab:>\ ,trail:_,extends:>,precedes:<,nbsp:~
+set listchars=tab:>\ ,leadmultispace:·\ \ \ ,trail:_,extends:>,precedes:<,nbsp:~
 set showbreak=\\ " [bonus]
 
 set nobackup
@@ -121,6 +151,13 @@ set tw=500
 set ai
 set si
 set nowrap
+
+let g:pencil#wrapModeDefault='soft'
+aug pencil
+    au!
+    au FileType markdown,mkd call pencil#init()
+    au FileType text         call pencil#init()
+aug end
 
 aug i3config_ft_detection
     au!
@@ -144,9 +181,6 @@ aug init
     " Don't show trailing spaces in insert mode
     au InsertEnter * setlocal listchars-=trail:_
     au InsertLeave * setlocal listchars<
-
-    " Automatically close vim if NERDTree is the only window remaining
-    au BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
 aug end
 
 au! User GoyoEnter Limelight
@@ -158,9 +192,9 @@ call LspAddServer([#{name: 'clangd',
         \          args: [],
         \          syncInit: v:true
         \       }])
-call LspAddServer([#{name: 'rustlang',
+call LspAddServer([#{name: 'rust-analyzer',
         \          filetype: ['rust'],
-        \          path: '/usr/bin/rust-analyzer',
+        \          path: '/home/marcy/.cargo/bin/rust-analyzer',
         \          args: [],
         \          syncInit: v:true
         \       }])
@@ -173,6 +207,12 @@ call LspAddServer([#{name: 'elixir',
 call LspAddServer([#{name: 'zls',
         \          filetype: ['zig'],
         \          path: '/usr/bin/zls',
+        \          args: [],
+        \          syncInit: v:true
+        \       }])
+call LspAddServer([#{name: 'gopls',
+        \          filetype: ['go'],
+        \          path: '/usr/bin/gopls',
         \          args: [],
         \          syncInit: v:true
         \       }])
