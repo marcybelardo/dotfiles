@@ -25,8 +25,7 @@ alias lsa='ls -laB'
 alias mvi='mv -i'
 
 autoload -U compinit && compinit
-
 eval "$(starship init zsh)"
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-# eval "$(zellij setup --generate-auto-start zsh)"
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
