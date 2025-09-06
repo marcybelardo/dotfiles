@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+LIST_UPDATES=false
+SHOW_COUNT=false
+
+case $1 in
+    -l) LIST_UPDATES=true ;;
+    -n) SHOW_COUNT=true ;;
+    *) exit 1 ;;
+esac
+
+check_updates() {
+    local official_updates=0
+    local aur_updates=0
+    local update_list=""
+
+    if $SHOW_COUNT; then
+        official_updates=$(checkupdates 2>/dev/null | wc -l)
+    elif $LIST_UPDATES; then
+        update_list+=$(checkupdates 2>/dev/null || echo -e "NoArch\n")
+        update_list+="\n"
+    fi
+
+    if ! command -v paru &> /dev/null; then
+        echo "Paru not installed! Cannot run script."
+        exit 1
+    fi
+
+    if $SHOW_COUNT; then
+        aur_updates=$(paru -Qua 2>/dev/null | wc -l)
+    elif $LIST_UPDATES; then
+        update_list+=$(paru -Qua 2>/dev/null || echo -e "NoAUR\n")
+        update_list+="\n"
+    fi
+
+    if $SHOW_COUNT; then
+        if [ "$official_updates" -eq 0 ] && [ "$aur_updates" -eq 0 ]; then
+            echo "NoUp"
+        else
+            echo "Up $official_updates/$aur_updates"
+        fi
+    elif $LIST_UPDATES; then
+        echo -e "$update_list"
+    fi
+}
+
+if $LIST_UPDATES || $SHOW_COUNT; then
+    check_updates
+fi

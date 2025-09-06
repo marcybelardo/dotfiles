@@ -47,18 +47,18 @@ packadd lsp
 
 set background=dark
 
-let g:gruvbox_material_background='hard'
-let g:gruvbox_material_better_performance=1
-colorscheme gruvbox-material
+" let g:gruvbox_material_background='hard'
+" let g:gruvbox_material_better_performance=1
+" colorscheme gruvbox-material
 
 " let g:edge_style='aura'
 " let g:edge_dim_foreground=0
 " let g:edge_better_performance=1
 " colorscheme edge
 
-" let g:everforest_background='hard'
-" let g:everforest_better_performance=1
-" colorscheme everforest
+let g:everforest_background='hard'
+let g:everforest_better_performance=1
+colorscheme everforest
 
 let g:lightline = {
         \ 'colorscheme': 'gruvbox_material',

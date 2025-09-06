@@ -1,0 +1,158 @@
+; WINDOWS
+(defwindow win0 :monitor 0
+                :geometry (geometry :x 0 :y 0 :height "24px" :width "100%" :anchor "center bottom")
+                :stacking "fg"
+                :exclusive true
+                :focusable false
+  (bar :monitor "HDMI-A-1"))
+(defwindow win1 :monitor 1
+                :geometry (geometry :x 0 :y 0 :height "24px" :width "100%" :anchor "center bottom")
+                :stacking "fg"
+                :exclusive true
+                :focusable false
+  (bar :monitor "DP-2"))
+
+; BAR
+(defwidget bar [monitor]
+  (box :orientation "h"
+       :space-evenly true
+       :class "bar"
+    (modules :monitor monitor)))
+
+(defwidget modules [monitor]
+  (box :orientation "h"
+       :space-evenly false
+    (modules-left :monitor monitor)
+    (modules-right)))
+
+(defwidget modules-left [monitor]
+  (box :orientation "h"
+       :hexpand true
+       :spacing 8
+       :space-evenly false
+    (workspaces :monitor monitor)))
+
+(defwidget modules-right []
+  (box :orientation "h"
+       :hexpand false
+       :spacing 16
+       :space-evenly false
+    (upd)
+    (vol)
+    (net)
+    (mem)
+    (cpu)
+    (date)
+    (power)))
+
+; workspaces
+(defpoll workspacespoll :interval "1s"
+                        :initial "{}"
+  `../scripts/fht_workspaces`)
+
+(defwidget workspaces [monitor]
+  (box :orientation "h"
+       :space-evenly false
+    (for w in "${workspacespoll[monitor]["workspaces"]}"
+      (button :class {w["active"] ? "ws-active" : "ws-inactive"}
+              :onclick "fht-compositor ipc action focus-workspace-by-index ${w["idx"]}"
+        (label :text "${w["idx"]}")))))
+
+; UPD
+(defpoll update_num_poll :interval "3m" "../scripts/updates -n")
+(defpoll update_list_poll :interval "3m" "../scripts/updates -l")
+
+(defwidget upd []
+  (tooltip
+    (label :class "tooltip" :text update_list_poll)
+    (box :orientation "h"
+         :class "upd"
+         :space-evenly false
+      (label :text update_num_poll))))
+
+; NET
+(defwidget net []
+  (box :orientation "h"
+       :class "net"
+       :space-evenly false
+    (label :text "enp42s0 ${formatbytes(floor(EWW_NET.enp42s0["NET_DOWN"]), false, "si")}/s")))
+
+; CPU
+(defwidget cpu []
+  (box :orientation "h"
+       :class "cpu"
+       :space-evenly false
+    (label :text "${round(EWW_CPU.avg, 0)}%")))
+
+; MEM
+(defwidget mem []
+  (box :orientation "h"
+       :class "mem"
+       :space-evenly false
+    (label :text "${formatbytes(floor(EWW_RAM.used_mem), false, "iec")}")))
+
+; VOL
+(deflisten vol_listen :initial "{ \"volume\": 0, \"muted\": \"false\" }" "../scripts/pipewire")
+
+(defwidget vol []
+  (eventbox :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            :onscroll "../scripts/pipewire-ctl {}"
+    (box :class "vol"
+      (label :text "${ vol_listen.muted ? 'MUTE' :
+                       'VOL ' + vol_listen.volume }"))))
+
+; DATE
+(defpoll date_poll :interval "1s" `date "+%d %b %Y %a %H:%M:%S"`)
+
+(defwidget date []
+  (box :class "date"
+       :space-evenly false
+    (label :text date_poll)))
+
+; POW
+(defwidget power []
+  (box :orientation "h"
+       :class "power"
+       :space-evenly false
+    (button :class "power_button_base"
+            :tooltip "Power Menu"
+            :onclick "../scripts/power_open"
+            "@")))
+
+(defwindow power_menu
+  :monitor 0
+  :stacking "overlay"
+  :exclusive false
+  :geometry (geometry :anchor "center")
+  (power_menu_show))
+
+(defwidget power_menu_show []
+  (box :class "power_parent"
+       :space-evenly false
+       :orientation "v"
+    (box :class "power_header"
+         :space-evenly false
+      (label :text "Power"
+             :class "power_title")
+      (button :class "power_exit"
+              :onclick "eww open power_menu --toggle"
+        (label :text "X")))
+    (box :class "power_body"
+         :space-evenly false
+         :orientation "h"
+      (button :class "power_button"
+              :vexpand false
+              :onclick "systemctl poweroff"
+              (label :text ""))
+      (button :class "power_button"
+              :vexpand false
+              :onclick "systemctl reboot"
+              (label :text ""))
+      (button :class "power_button"
+              :vexpand false
+              :onclick "systemctl hybrid-sleep"
+              (label :text "󰒲"))
+      (button :class "power_button"
+              :vexpand false
+              :onclick "fht-compositor ipc action quit"
+              (label :text "󰈆")))))

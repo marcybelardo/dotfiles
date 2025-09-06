@@ -1,6 +1,6 @@
 format = """
 $directory\
-$git_branch$git_commit$git_state$git_metrics$git_status\
+${custom.jj}$git_branch$git_commit$git_state$git_metrics$git_status \
 $c$elixir$golang$lua$python$rust$zig\
 $line_break\
 $hostname$character
@@ -12,3 +12,10 @@ success_symbol = '[\$](green)'
 error_symbol = '[\$](red)'
 vimcmd_symbol = '[~](green)'
 
+[custom.jj]
+command = "prompt"
+format = "$output"
+ignore_timeout = true
+shell = ["starship-jj", "--ignore-working-copy", "starship"]
+use_stdin = false
+when = true

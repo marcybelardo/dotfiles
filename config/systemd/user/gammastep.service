@@ -4,8 +4,5 @@ After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-Type=simple
-ExecStart=/usr/bin/swayidle -w \
-		lock 'swaylock -f -c 000000' \
-		before-sleep 'swaylock -f -c 000000'
+ExecStart=/usr/bin/gammastep -l 39.9:32.9 -t 6500:4500
 Restart=on-failure

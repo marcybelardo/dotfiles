@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+get_volume_and_mute() {
+    volume_and_mute=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's|^.*0\.||')
+    volume=$(echo ${volume_and_mute} | sed 's|^\([[:digit:]]\+\).*$|\1|')
+    muted=$(echo ${volume_and_mute} | grep -o MUTE)
+
+    if [[ -z "$volume" ]]; then
+        return 1
+    fi
+
+    echo "{\"volume\": $volume, \"muted\": $( [[ -z "$muted" ]] && echo "false" || echo "true" )}"
+}
+
+CURRENT_STATUS="$(get_volume_and_mute)"
+
+echo "$CURRENT_STATUS"
+
+while true; do
+    NEW_STATUS="$(get_volume_and_mute)"
+
+    if [[ "$CURRENT_STATUS" != "$NEW_STATUS" ]]; then
+        CURRENT_STATUS=$NEW_STATUS
+        echo "$CURRENT_STATUS"
+    fi
+done

@@ -4,8 +4,5 @@ After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-Type=simple
-ExecStart=/usr/bin/swayidle -w \
-		lock 'swaylock -f -c 000000' \
-		before-sleep 'swaylock -f -c 000000'
+ExecStart=/home/marcy/.local/bin/eww daemon
 Restart=on-failure

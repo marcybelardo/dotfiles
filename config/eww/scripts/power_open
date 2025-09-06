@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+~/.local/bin/eww open power_menu --toggle

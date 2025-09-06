@@ -3,7 +3,7 @@ font-style = Medium Extended
 font-style-bold = Bold Extended
 font-style-italic = Medium Extended Italic
 font-style-bold-italic = Bold Extended Italic
-font-size = 8
+font-size = 12
 
 theme = Kanagawa Wave
 
@@ -15,10 +15,14 @@ window-decoration = none
 window-padding-x = 8
 window-padding-y = 5
 
+confirm-close-surface = false
+
 shell-integration = bash
 shell-integration-features = sudo
 
 bold-is-bright = true
+
+gtk-single-instance = true
 
 keybind = ctrl+space>c=new_tab
 keybind = ctrl+space>space=previous_tab

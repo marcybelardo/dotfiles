@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+import subprocess
+import json
+
+def main():
+    ipc_stdout = subprocess.run("fht-compositor ipc --json space", shell=True, capture_output=True).stdout
+    ipc_json = json.loads(ipc_stdout)
+
+    space = {}
+
+    for name in ipc_json["monitors"]:
+        space[name] = {}
+
+        active_workspace_idx = ipc_json["monitors"][name]["active-workspace-idx"]
+        space[name] = {
+                "active-workspace-idx": active_workspace_idx,
+                "workspaces": []
+        }
+
+        for w in ipc_json["monitors"][name]["workspaces"]:
+            if w["windows"]:
+                workspace = {
+                        "idx": w["id"],
+                        "active": w["id"] == active_workspace_idx
+                }
+                space[name]["workspaces"].append(workspace)
+
+    print(json.dumps(space))
+
+if __name__ == "__main__":
+    main()
