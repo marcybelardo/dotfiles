@@ -22,6 +22,8 @@ Plug 'zenbones-theme/zenbones.nvim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/everforest'
 Plug 'sainnhe/edge'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'menisadi/kanagawa.vim'
 
 " ui
 Plug 'itchyny/lightline.vim'
@@ -33,6 +35,7 @@ Plug 'ziglang/zig.vim'
 Plug 'bfrg/vim-c-cpp-modern'
 Plug 'elkowar/yuck.vim'
 Plug 'justinj/vim-pico8-syntax'
+Plug 'rust-lang/rust.vim'
 
 " writing
 Plug 'preservim/vim-pencil'
@@ -47,6 +50,12 @@ packadd lsp
 
 set background=dark
 
+colorscheme kanagawa
+
+" colorscheme zenbones
+
+" colorscheme catppuccin_mocha
+
 " let g:gruvbox_material_background='hard'
 " let g:gruvbox_material_better_performance=1
 " colorscheme gruvbox-material
@@ -56,12 +65,12 @@ set background=dark
 " let g:edge_better_performance=1
 " colorscheme edge
 
-let g:everforest_background='hard'
-let g:everforest_better_performance=1
-colorscheme everforest
+" let g:everforest_background='hard'
+" let g:everforest_better_performance=1
+" colorscheme everforest
 
 let g:lightline = {
-        \ 'colorscheme': 'gruvbox_material',
+        \ 'colorscheme': 'kanagawabones',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'filename', 'readonly', 'gitbranch', 'modified' ] ]
@@ -139,7 +148,7 @@ set tm=500
 syntax on
 
 set list
-set listchars=tab:>\ ,leadmultispace:·\ \ \ ,trail:_,extends:>,precedes:<,nbsp:~
+set listchars=tab:>\ ,trail:_,extends:>,precedes:<,nbsp:~
 set showbreak=\\ " [bonus]
 
 set nobackup
@@ -206,7 +215,7 @@ call LspAddServer([#{name: 'elixir',
         \       }])
 call LspAddServer([#{name: 'zls',
         \          filetype: ['zig'],
-        \          path: '/usr/bin/zls',
+        \          path: '/home/marcy/.local/bin/zls',
         \          args: [],
         \          syncInit: v:true
         \       }])

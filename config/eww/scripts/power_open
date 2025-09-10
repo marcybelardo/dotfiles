@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-~/.local/bin/eww open power_menu --toggle
+~/.local/bin/eww -c ~/.config/eww/fht open power_menu --toggle

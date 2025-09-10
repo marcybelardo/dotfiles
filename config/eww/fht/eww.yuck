@@ -53,6 +53,8 @@
 (defwidget workspaces [monitor]
   (box :orientation "h"
        :space-evenly false
+       :spacing 8
+       :class "ws"
     (for w in "${workspacespoll[monitor]["workspaces"]}"
       (button :class {w["active"] ? "ws-active" : "ws-inactive"}
               :onclick "fht-compositor ipc action focus-workspace-by-index ${w["idx"]}"

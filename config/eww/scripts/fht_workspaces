@@ -19,10 +19,10 @@ def main():
         }
 
         for w in ipc_json["monitors"][name]["workspaces"]:
-            if w["windows"]:
+            if w["windows"] or w["id"] == active_workspace_idx:
                 workspace = {
-                        "idx": w["id"],
-                        "active": w["id"] == active_workspace_idx
+                        "idx": w["id"] + 1,
+                        "active": w["id"] == active_workspace_idx,
                 }
                 space[name]["workspaces"].append(workspace)
 
